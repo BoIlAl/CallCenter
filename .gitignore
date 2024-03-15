@@ -1,0 +1,7 @@
+.vscode/
+CallCenter/build/
+CallCenter/cfg/
+CallCenter/log/
+CallCenter/.vscode/
+
+CallEmulator/__pycache__/
