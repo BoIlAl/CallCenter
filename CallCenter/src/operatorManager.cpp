@@ -51,8 +51,6 @@ void OperatorManager::run() {
                 return !m_free.empty() || !m_isRunning;
             });
         }
-
-        clearFinishedThreads();
         
         if (!m_isRunning) {
             if (m_pLogTrace) {
@@ -103,6 +101,8 @@ void OperatorManager::run() {
             },
             talkEndPoint
         );
+        
+        clearFinishedThreads();
 
         m_waitingThreadPool.insert({freeOpId, opThread});
 

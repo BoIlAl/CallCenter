@@ -1,5 +1,6 @@
 import requests
 import time
+import grequests
 
 class Call_emulator:
     host = 'http://localhost:8080/'

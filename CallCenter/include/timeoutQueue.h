@@ -24,7 +24,7 @@ private:
     std::function<void(uint64_t)> m_popCallback;
 
     std::mutex m_mutex;
-    std::unordered_map<uint64_t, std::thread> m_threads;
+    std::unordered_map<uint64_t, std::unique_ptr<std::thread>> m_threads;
     std::vector<uint64_t> m_endedThreads;
 
     std::list<std::shared_ptr<TimeoutQueueElement>> m_list;
@@ -34,7 +34,7 @@ public:
 
     void push(uint64_t elem, const std::chrono::system_clock::time_point& endPoint);
 
-    bool tryPop(uint64_t value);
+    bool tryPop(uint64_t& value);
 
     bool contains(uint64_t value);
     void erase(uint64_t value);

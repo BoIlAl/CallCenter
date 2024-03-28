@@ -138,7 +138,7 @@ void CDRHandler::handleFilled(const std::shared_ptr<CDR>& cdr) {
 }
 
 void CDRHandler::handleTimeout(uint64_t number) {
-    std::unique_lock<std::mutex> lock(m_mutex);
+    std::lock_guard<std::mutex> lock(m_mutex);
 
     auto cdr = m_handling.find(number)->second;
 
@@ -225,7 +225,7 @@ void CDRHandler::addToPools(const std::shared_ptr<CDR>& cdr) {
     m_handling.insert({cdr->number, cdr});
     
     auto endPoint = getPointAfterRndInterval(m_pCfg->rQueueMin(), m_pCfg->rQueueMax());
-
+    
     if (endPoint == time_point::min() && m_pLogTrace) {
         m_pLogTrace->P7_WARNING(nullptr, TM("Cfg data corrupted"));
     }
